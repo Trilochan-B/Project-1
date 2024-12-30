@@ -1,2 +1,4 @@
 numpy
+panda
+scikit-learn
 -e .
