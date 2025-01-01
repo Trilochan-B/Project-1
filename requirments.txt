@@ -1,4 +1,5 @@
 numpy
 panda
 scikit-learn
+dill
 -e .
