@@ -4,6 +4,7 @@ from src.exception import CustonmException
 from src.logger import logging
 import dill
 from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
 import pickle
 
 def save_object(obj, file_path):
@@ -15,12 +16,17 @@ def save_object(obj, file_path):
     except Exception as e:
         raise CustonmException(e,sys)
     
-def evaluate_models(x_train,y_train,x_test,y_test,models):
+def evaluate_models(x_train,y_train,x_test,y_test,models,params):
     try:
         report ={}
         for i in range(len(list(models))):
             model = list(models.values())[i]
+            param = list(params.values())[i]
+            
+            gs = GridSearchCV(estimator=model,param_grid=params)
+            gs.fit(x_train,y_train)
 
+            model.set_params(**gs.best_params_)
             model.fit(x_train,y_train)
             y_pred = model.predict(x_test)
 
