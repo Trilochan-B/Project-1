@@ -62,11 +62,11 @@ class dataTransformation:
 
             preprocessor_obj = self.get_transformation_obj()
 
-            y_train = train_df[-1] ## assuming last column of the df is dependend column
-            y_test = test_df[-1] ## assuming last column of the df is dependend column
+            y_train = train_df[:,-1] ## assuming last column of the df is dependend column
+            y_test = test_df[:,-1] ## assuming last column of the df is dependend column
 
-            input_train_feature = train_df[0:-1]
-            input_test_feature = test_df[0:-1]
+            input_train_feature = train_df[:,:-1]
+            input_test_feature = test_df[:,:-1]
 
             logging.info("Appling transformation on trai and test data")
 
