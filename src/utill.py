@@ -4,6 +4,7 @@ from src.exception import CustonmException
 from src.logger import logging
 import dill
 from sklearn.metrics import r2_score
+import pickle
 
 def save_object(obj, file_path):
     try:
@@ -31,5 +32,12 @@ def evaluate_models(x_train,y_train,x_test,y_test,models):
 
 
 
+    except Exception as e:
+        raise CustonmException(e,sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path,"rb") as f:
+            return dill.load(f)
     except Exception as e:
         raise CustonmException(e,sys)
